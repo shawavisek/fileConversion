@@ -15,7 +15,8 @@ app.post("/",(req,res)=>{
         var file = req.files.files,
         
 
-            filename = file.name;
+            filename = "content.pdf";
+        
         file.mv("./files/pdf/"+filename,(err)=>{
             if(err){
                 console.log(err);
@@ -26,6 +27,14 @@ app.post("/",(req,res)=>{
         });
     }
 });
+
+//using spawn method from child_process
+//to run python file in nodejs
+app.get('/name',name);
+function name(req,res){
+    var spawn = require("child_process").spawn;
+    var process = spawn('python',["./PdfConverterToText.py"]);
+};
 
 app.listen(3001,()=>{
     console.log("Server is listening to 127.0.0.1 : 3001");
